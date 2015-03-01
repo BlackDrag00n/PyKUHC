@@ -4,5 +4,7 @@ version: 1.0
 description: >
              Le plugin UHC fait par la team ParamYsticK !
 commands:
+  timer:
+    description: Lance un timer avec le temps desire !
   soin:
     description: Permet de ce soigner ou de soigner un autre joueur !

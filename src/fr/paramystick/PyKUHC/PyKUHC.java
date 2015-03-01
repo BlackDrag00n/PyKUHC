@@ -4,11 +4,13 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.paramystick.PyKUHC.events.PlayerJoin;
 import fr.paramystick.PyKUHC.events.PlayerQuit;
+import fr.paramystivk.PyKUHC.commands.Counter;
 
 public class PyKUHC extends JavaPlugin {
 	public final Logger log = Logger.getLogger("Minecraft"); // On récupére dans une variable "log" la console
@@ -24,6 +26,7 @@ public class PyKUHC extends JavaPlugin {
 	public void onEnable() { // Lorsque le plugin est activer
 		getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerQuit(this), this);
+		getServer().getPluginManager().registerEvents((Listener) new Counter(), this);
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.GREEN + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Activer !");	// On affiche dans la console
 	}
