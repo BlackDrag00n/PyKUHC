@@ -6,5 +6,6 @@ description: >
 commands:
   timer:
     description: Lance un timer avec le temps desire !
-  soin:
-    description: Permet de ce soigner ou de soigner un autre joueur !
+    usage: |
+           /timer <seconde(s)>
+           Exemple: /timer 30 - Demarre le compte a rebour a 30 secondes.
