@@ -31,9 +31,11 @@ public class PyKUHC extends JavaPlugin {
 	public void onEnable() { // Lorsque le plugin est activer
 		getServer().getPluginManager().registerEvents(new PlayerJoin(this), this); // Enregistrer l'evenement PlayerJoin de la classe "PlayerJoin"
 		getServer().getPluginManager().registerEvents(new PlayerQuit(this), this); // Enregistrer l'evenement PlayerQuit de la classe "PlayerQuit"
+		
 		// Récupérer la commande TIMER de la classe "CommandeTimer"
 		CommandeTimer = new CommandeTimer(this); // On précise qu'il y a des commandes dans la classe "CommandeTimer"
 		getCommand("timer").setExecutor(CommandeTimer); // On précise quelle commande on veut récupérer de la classe "CommandeTimer", ici : /timer
+		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.GREEN + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Activer !"); // On affiche dans la console
 		Boucle.timerLoop(); //j'appelle ma fontion timerLoop() a partie du fichier Boucle.java
 	}
