@@ -1,0 +1,8 @@
+name: PyKUHC
+main: fr.paramystick.PyKUHC.PyKUHC
+version: 1.0
+description: >
+             Le plugin UHC fait par la team ParamYsticK !
+commands:
+  soin:
+    description: Permet de ce soigner ou de soigner un autre joueur !
