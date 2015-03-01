@@ -17,6 +17,6 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void playerJoin(PlayerJoinEvent evenement) { // Si l'event est un JOIN serveur
 		evenement.setJoinMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.GOLD + evenement.getPlayer().getName() + ChatColor.GREEN + " a rejoint la session !"); // On envoie un message a tout le monde pour prevenir qu'un joueur a rejoint le serveur
-		evenement.getPlayer().sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.GREEN + "Bienvenu, Former les equipes et preparez-vous au combat !"); // On envoie un message au joueur qui rejoint
+		evenement.getPlayer().sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.GREEN + "Bienvenue, Former les equipes et preparez-vous au combat !"); // On envoie un message au joueur qui rejoint
 	}
 }
