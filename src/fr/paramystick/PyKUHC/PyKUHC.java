@@ -18,13 +18,16 @@ public class PyKUHC extends JavaPlugin {
 	public final PluginDescriptionFile pdfFile = this.getDescription(); // On lis le fichier "plugin.yml"
 	public String nomPlugin = pdfFile.getName(); // On crée une variable public qui va permettre d'etre appeler partout (PUBLIC)
 	
-	public int time = 0; // variable contenant le temps de décompte en secondes
+	private static int time = 0; // variable contenant le temps de décompte en secondes
+	public static int loop = 0; // variable contenant la boucle timer
+	
 	
 	public Boucle Boucle = new Boucle(); //récupération du contenue du fichier Boucle.java
 	
 	@Override
 	public void onDisable() { // Lorsque le plugin est désactiver ou redémarrer
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.RED + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Desactiver !"); // On affiche dans la console
+		getServer().getScheduler().cancelTask(loop); // je coupe la boucle timer lorque le plugin est désactivé
 	}
 	
 	@Override
@@ -37,6 +40,13 @@ public class PyKUHC extends JavaPlugin {
 		getCommand("timer").setExecutor(CommandeTimer); // On précise quelle commande on veut récupérer de la classe "CommandeTimer", ici : /timer
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.GREEN + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Activer !"); // On affiche dans la console
-		Boucle.timerLoop(); //j'appelle ma fontion timerLoop() a partie du fichier Boucle.java
+	}
+
+	public static int getTime() { // me sert a récupérer la variable time dans d'autre fichier , j'ai besoin de mettre cette variable en static , me demande pas pourquoi j'ai pas compris
+		return time;
+	}
+
+	public static void setTime(int time) {
+		PyKUHC.time = time;
 	}
 }

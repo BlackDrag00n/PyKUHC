@@ -8,4 +8,7 @@ commands:
     description: Lance un timer avec le temps desire !
     usage: |
            /timer <seconde(s)>
-           Exemple: /timer 30 - Demarre le compte a rebour a 30 secondes.
+           /timer <stop/start>
+           Exemple: /timer 30 - initialise le compte a rebour a 30 secondes.
+                       /timer start demarre le compte a rebour.
+                       /timer stop arrete le compte a rebour.
