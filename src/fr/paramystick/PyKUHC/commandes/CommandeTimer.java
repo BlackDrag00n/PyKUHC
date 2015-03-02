@@ -22,19 +22,19 @@ public class CommandeTimer implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("timer")) {
 			if (args.length == 1) {
 				try {
-					PyKUHC.setTime(Integer.parseInt(args[0])+1);// je définie la variable time lorsque l'argument est un nombre
-					player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer]"+ ChatColor.GREEN + "Timer initialisé a " + ChatColor.GOLD + args[0]);
+					Boucle.setTime(Integer.parseInt(args[0]));// je définie la variable time lorsque l'argument est un nombre
+					player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] " + ChatColor.GREEN + "Timer initialisé à " + ChatColor.GOLD + args[0] + ChatColor.GREEN + " secondes");
 					return true;
 				}
 				catch(NumberFormatException e) {
 					if (args[0].equalsIgnoreCase("stop")) {
-						pluginPyKUHC.getServer().getScheduler().cancelTask(PyKUHC.loop); // je stop la boucle timer lorsque l'argument vos "stop"
-						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer]"+ ChatColor.GREEN + "Timer stopé");
+						pluginPyKUHC.getServer().getScheduler().cancelTask(Boucle.loop); // je stop la boucle timer lorsque l'argument vos "stop"
+						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] "+ ChatColor.GREEN + "Timer stopé");
 						return true;
 					}
 					else if ( args[0].equalsIgnoreCase("start")) {
-						PyKUHC.loop = pluginPyKUHC.getServer().getScheduler().scheduleSyncRepeatingTask(pluginPyKUHC,new Boucle(), 25, 25); // je démarre  la boucle timer lorsque l'argument vos "start"
-						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer]"+ ChatColor.GREEN + "Timer démarré");
+						Boucle.loop = pluginPyKUHC.getServer().getScheduler().scheduleSyncRepeatingTask(pluginPyKUHC,new Boucle(pluginPyKUHC), 25, 25); // je démarre  la boucle timer lorsque l'argument vos "start"
+						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] "+ ChatColor.GREEN + "Timer démarré");
 						return true;
 					}
 					else {
