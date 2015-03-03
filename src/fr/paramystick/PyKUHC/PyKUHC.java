@@ -11,6 +11,7 @@ import fr.paramystick.PyKUHC.commandes.CommandeTimer;
 import fr.paramystick.PyKUHC.events.PlayerJoin;
 import fr.paramystick.PyKUHC.events.PlayerQuit;
 import fr.paramystick.PyKUHC.fonctions.Boucle;
+import fr.paramystick.PyKUHC.fonctions.Scoreboard;
 
 public class PyKUHC extends JavaPlugin {
 	
@@ -25,6 +26,7 @@ public class PyKUHC extends JavaPlugin {
 	public void onDisable() { // Lorsque le plugin est désactiver ou redémarrer
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.RED + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Desactiver !"); // On affiche dans la console
 		getServer().getScheduler().cancelTask(Boucle.loop); // je coupe la boucle timer lorque le plugin est désactivé
+		getServer().getScheduler().cancelTask(Scoreboard.affLoop);
 	}
 	
 	@Override
@@ -35,6 +37,8 @@ public class PyKUHC extends JavaPlugin {
 		// Récupérer la commande TIMER de la classe "CommandeTimer"
 		CommandeTimer = new CommandeTimer(this); // On précise qu'il y a des commandes dans la classe "CommandeTimer"
 		getCommand("timer").setExecutor(CommandeTimer); // On précise quelle commande on veut récupérer de la classe "CommandeTimer", ici : /timer
+		
+		Scoreboard.affLoop = this.getServer().getScheduler().scheduleSyncRepeatingTask(this,new Scoreboard(this), 1, 1);
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.GREEN + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Activer !"); // On affiche dans la console
 	}
