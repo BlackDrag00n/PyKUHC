@@ -34,7 +34,7 @@ public class CommandeTimer implements CommandExecutor {
 						return true;
 					}
 					else if ( args[0].equalsIgnoreCase("start")) {
-						Boucle.loop = pluginPyKUHC.getServer().getScheduler().scheduleSyncRepeatingTask(pluginPyKUHC,new Boucle(pluginPyKUHC), 25, 25); // je démarre  la boucle timer lorsque l'argument vos "start"
+						Boucle.loop = pluginPyKUHC.getServer().getScheduler().scheduleSyncRepeatingTask(pluginPyKUHC,new Boucle(pluginPyKUHC), 0, 20); // je démarre  la boucle timer lorsque l'argument vos "start"
 						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] "+ ChatColor.GREEN + "Timer démarré");
 						Boucle.setLoopActive(true);
 						return true;

@@ -38,7 +38,7 @@ public class PyKUHC extends JavaPlugin {
 		CommandeTimer = new CommandeTimer(this); // On précise qu'il y a des commandes dans la classe "CommandeTimer"
 		getCommand("timer").setExecutor(CommandeTimer); // On précise quelle commande on veut récupérer de la classe "CommandeTimer", ici : /timer
 		
-		Scoreboard.affLoop = this.getServer().getScheduler().scheduleSyncRepeatingTask(this,new Scoreboard(this), 1, 1);
+		Scoreboard.affLoop = this.getServer().getScheduler().scheduleSyncRepeatingTask(this,new Scoreboard(this), 0, 20);
 		
 		Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.GREEN + this.nomPlugin + " v" + pdfFile.getVersion() + " a ete Activer !"); // On affiche dans la console
 	}

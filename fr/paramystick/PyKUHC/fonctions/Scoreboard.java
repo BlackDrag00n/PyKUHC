@@ -38,6 +38,7 @@ public class Scoreboard implements Runnable {
 	public Scoreboard(PyKUHC pluginPyKUHC) {
 		this.pluginPyKUHC = pluginPyKUHC;
 	}
+	
 	@SuppressWarnings("unused")
 	public void run() {
 		if (firstTime == 0) {
@@ -53,11 +54,11 @@ public class Scoreboard implements Runnable {
 		int i = 0;
 		int k = 0;
 		
-		blank1 = objective.getScore("");
+		blank1 = objective.getScore(" ");
 		blank1.setScore(-1);
-		blank2 = objective.getScore("");
+		blank2 = objective.getScore(" ");
 		blank2.setScore(-3);
-		blank3 = objective.getScore("");
+		blank3 = objective.getScore(" ");
 		blank3.setScore(-5);
 		
 		for (Player player : Bukkit.getOnlinePlayers()) {
@@ -72,13 +73,13 @@ public class Scoreboard implements Runnable {
 			}
 		}
 		
-		nbJoueur = objective.getScore(ChatColor.GREEN + "Joueur : " + ChatColor.GOLD + i + "/" + maxJoueur);
+		nbJoueur = objective.getScore(ChatColor.GREEN + "Joueur: " + ChatColor.GOLD + i + "/" + maxJoueur);
 		nbJoueur.setScore(-2);
-		nbEquipe = objective.getScore(ChatColor.GREEN + "Equipe : " + ChatColor.GOLD + k + "/" + maxJoueur/2);
+		nbEquipe = objective.getScore(ChatColor.GREEN + "Equipe: " + ChatColor.GOLD + k + "/" + maxJoueur/2);
 		nbEquipe.setScore(-4);
 		
 		if (Boucle.getLoopActive()) {
-			timer = objective.getScore(ChatColor.GREEN + "Temps avant lancement : "+ ChatColor.GOLD + (Boucle.getTime()+1) + ChatColor.GREEN + " secondes");
+			timer = objective.getScore(ChatColor.GREEN + "Début dans: "+ ChatColor.GOLD + (Boucle.getTime()+1) + ChatColor.GREEN + "s");
 		}
 		else {
 			timer = objective.getScore(ChatColor.GRAY + "en attente");
