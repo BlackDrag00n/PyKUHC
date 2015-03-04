@@ -2,31 +2,45 @@ package fr.paramystick.PyKUHC.fonctions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerExpChangeEvent;
+
 import fr.paramystick.PyKUHC.PyKUHC;
 
-public class Boucle extends PyKUHC {
-	public void timerLoop() {
-		
-		double Dsec = 0; // variable contenant les dixièmes de secondes
-		int timeLastTick = 0; // variable contenant la valeur de time le tick précédant
-		
-		while (true) {
-			Dsec = Dsec + 0.1; // j'incrémente la variable Dsec d'un dixième tous les ticks
-			if (Dsec > 10) {
-				Dsec = 0;  // si Dsec est supérieur a 10 alors je la remet a 0
+public class Boucle implements Runnable {
+	private PyKUHC pluginPyKUHC; // On crée la variable qui va etre utiliser dans cette classe seulement (PRIVATE)
+	
+	public Boucle(PyKUHC pluginPyKUHC) { // On crée le constructor
+		this.pluginPyKUHC = pluginPyKUHC;
+	}
+
+	private static int time = 0; // variable contenant le temps de décompte en secondes
+	public static int loop = 0; // variable contenant la boucle timer
+	
+	public void run() {
+		for (Player player : Bukkit.getOnlinePlayers()) { // pour chaque joueur présent sur le serveur 
+			player.setLevel(Boucle.getTime());  // j'affiche le temps restant avec leur barre d'expérience
+			if (Boucle.getTime() == 10 || (Boucle.getTime() <= 5 && Boucle.getTime() > 0)) {
+				player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] " + ChatColor.GREEN + Boucle.getTime() +" Secondes");
+				player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 10, 1);
 			}
-			timeLastTick = time; // je définie timeLastTick avat que Time ne change de valeur
-			if ( time > 0) {
-				time = time - (int)Dsec; // je décrément time de Dsec sans compté la virgule
-			}
-			if (time != timeLastTick && time <= 5) { // si time n'est pas égale a timeLastTick ET que time est inférieur ou égale a 5 alors
-				Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "[ParamYsticK] " + ChatColor.YELLOW + "[Timer]" + ChatColor.GREEN + time +" Secondes" ); // j'affiche le temps restant à partir de 5 secondes
-			}
-			for ( Player p : Bukkit.getOnlinePlayers() ) { // pour chaque joueur présentsur le serveur 
-				((PlayerExpChangeEvent) p).setAmount(time);  // j'affiche le temps restant avec leur barre d'expérience
+			if (Boucle.getTime() == 0) {
+				player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] " + ChatColor.GREEN + "L'UHC démarre !!");
+				player.playSound(player.getLocation(), Sound.EXPLODE, 10, 1);
+				Bukkit.getServer().getScheduler().cancelTask(Boucle.loop);
+				break;
 			}
 		}
+		
+		Boucle.setTime(Boucle.getTime() - 1);
+	}
+
+	public static int getTime() { // me sert a récupérer la variable time dans d'autre fichier , j'ai besoin de mettre cette variable en static , me demande pas pourquoi j'ai pas compris
+		
+		return Boucle.time;
+	}
+
+	public static void setTime(int time) {
+		Boucle.time = time;
 	}
 }

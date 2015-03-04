@@ -5,7 +5,10 @@ description: >
              Le plugin UHC fait par la team ParamYsticK !
 commands:
   timer:
-    description: Lance un timer avec le temps desire !
+    description: Lance un timer avec le temps desiré !
     usage: |
            /timer <seconde(s)>
-           Exemple: /timer 30 - Demarre le compte a rebour a 30 secondes.
+           /timer <stop/start>
+           Exemple: /timer 30 - Initialise le compte à rebour à 30 secondes.
+                       /timer start - Démarre le compte à rebour.
+                       /timer stop - Arrête le compte à rebour.
