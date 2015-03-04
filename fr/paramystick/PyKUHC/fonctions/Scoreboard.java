@@ -48,7 +48,7 @@ public class Scoreboard implements Runnable {
 		blank2 = objective.getScore("");
 		blank2.setScore(-3);
 		
-		for (Player player : Bukkit.getOnlinePlayers()) {
+		for (@SuppressWarnings("unused") Player player : Bukkit.getOnlinePlayers()) {
 			i = i + 1;
 		}
 		if (equipe) {
