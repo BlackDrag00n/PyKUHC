@@ -1,0 +1,14 @@
+name: PyKUHC
+main: fr.paramystick.PyKUHC.PyKUHC
+version: 1.0
+description: >
+             Le plugin UHC fait par la team ParamYsticK !
+commands:
+  timer:
+    description: Lance un timer avec le temps desiré !
+    usage: |
+           /timer <seconde(s)>
+           /timer <stop/start>
+           Exemple: /timer 30 - Initialise le compte à rebour à 30 secondes.
+                       /timer start - Démarre le compte à rebour.
+                       /timer stop - Arrête le compte à rebour.
