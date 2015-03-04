@@ -30,11 +30,13 @@ public class CommandeTimer implements CommandExecutor {
 					if (args[0].equalsIgnoreCase("stop")) {
 						pluginPyKUHC.getServer().getScheduler().cancelTask(Boucle.loop); // je stop la boucle timer lorsque l'argument vos "stop"
 						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] "+ ChatColor.GREEN + "Timer stopé");
+						Boucle.setLoopActive(false);
 						return true;
 					}
 					else if ( args[0].equalsIgnoreCase("start")) {
 						Boucle.loop = pluginPyKUHC.getServer().getScheduler().scheduleSyncRepeatingTask(pluginPyKUHC,new Boucle(pluginPyKUHC), 25, 25); // je démarre  la boucle timer lorsque l'argument vos "start"
 						player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] "+ ChatColor.GREEN + "Timer démarré");
+						Boucle.setLoopActive(true);
 						return true;
 					}
 					else {
