@@ -11,10 +11,20 @@ import fr.paramystick.PyKUHC.fonctions.Boucle;
 import fr.paramystick.PyKUHC.PyKUHC;
 
 public class Scoreboard implements Runnable {
+
+	@SuppressWarnings("unused")
+	private PyKUHC pluginPyKUHC;
 	
-	ScoreboardManager manager = Bukkit.getScoreboardManager();
-	org.bukkit.scoreboard.Scoreboard affichage = manager.getNewScoreboard();
-	Objective objective = affichage.registerNewObjective("ParamYsticK UHC", "dummy");
+	public Scoreboard(PyKUHC pluginPyKUHC) {
+		this.pluginPyKUHC = pluginPyKUHC;
+	}
+	
+	// Création d'un scoreboard
+	ScoreboardManager manager = Bukkit.getScoreboardManager(); // Création d'un scoreboard
+	org.bukkit.scoreboard.Scoreboard affichage = manager.getNewScoreboard(); // Création d'un scoreboard
+	Objective objective = affichage.registerNewObjective("ParamYsticK UHC", "dummy"); // Nom et type de l'objectif
+	
+	// Initialisation des variables (création) - NE PAS MODIFIER -
 	Score nbJoueur = null;
 	Score nbEquipe = null;
 	Score timer = null;
@@ -24,24 +34,27 @@ public class Scoreboard implements Runnable {
 	String entry1;
 	String entry2;
 	String entry3;
-	int firstTime = 1;
-	int joueurParEquipe = 2;
-	
+	boolean firstTime = true;
 	public static int affLoop;
 	
-	int maxJoueur = Bukkit.getMaxPlayers();
-	
-	@SuppressWarnings("unused")
-	private PyKUHC pluginPyKUHC;
-	
+	// Variable configurable
 	boolean equipe = false;
-	public Scoreboard(PyKUHC pluginPyKUHC) {
-		this.pluginPyKUHC = pluginPyKUHC;
-	}
+	int joueurParEquipe = 2;
 	
+	// Boucle qui affichera ce que contient le scoreboard
 	@SuppressWarnings("unused")
 	public void run() {
-		if (firstTime == 0) {
+		
+		// Si c'est la premiere fois on intialise le SCOREBOARD et les espaces
+		if (firstTime) {
+			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+			
+			blank1 = objective.getScore("");
+			blank1.setScore(-1);
+			blank2 = objective.getScore(" ");
+			blank2.setScore(-4);
+		// Sinon on met a jour les informations
+		} else {
 			entry1 = nbJoueur.getEntry();
 			entry2 = nbEquipe.getEntry();
 			entry3 = timer.getEntry();
@@ -49,21 +62,18 @@ public class Scoreboard implements Runnable {
 			affichage.resetScores(entry2);
 			affichage.resetScores(entry3);
 		}
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		
+		//On compte le nombre de joueur en ligne / Max joueur ET on affiche le resultat
 		int i = 0;
-		int k = 0;
-		
-		blank1 = objective.getScore(" ");
-		blank1.setScore(-1);
-		blank2 = objective.getScore(" ");
-		blank2.setScore(-3);
-		blank3 = objective.getScore(" ");
-		blank3.setScore(-5);
-		
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			i = i + 1;
 		}
+		int maxJoueur = Bukkit.getMaxPlayers();
+		nbJoueur = objective.getScore(ChatColor.GREEN + "Joueur: " + ChatColor.GOLD + i + "/" + maxJoueur);
+		nbJoueur.setScore(-2);
+		
+		// On compte le nombre d'équipe faisable selon le nombre de joueur en ligne / (Max joueur/2) ET on affiche
+		int k = 0;
 		if (equipe) {
 			if (i % joueurParEquipe == 0){
 				k = i / joueurParEquipe;
@@ -72,25 +82,24 @@ public class Scoreboard implements Runnable {
 				k = (i / joueurParEquipe) + 1;
 			}
 		}
-		
-		nbJoueur = objective.getScore(ChatColor.GREEN + "Joueur: " + ChatColor.GOLD + i + "/" + maxJoueur);
-		nbJoueur.setScore(-2);
 		nbEquipe = objective.getScore(ChatColor.GREEN + "Equipe: " + ChatColor.GOLD + k + "/" + maxJoueur/2);
-		nbEquipe.setScore(-4);
+		nbEquipe.setScore(-3);
 		
+		// On affiche le temps restant lors de la lancement de la commande /timer start
 		if (Boucle.getLoopActive()) {
 			timer = objective.getScore(ChatColor.GREEN + "Début dans: "+ ChatColor.GOLD + (Boucle.getTime()+1) + ChatColor.GREEN + "s");
 		}
 		else {
-			timer = objective.getScore(ChatColor.GRAY + "en attente");
+			timer = objective.getScore(ChatColor.GRAY + "Préparation ...");
 		}
-		timer.setScore(-6);
+		timer.setScore(-5);
 		
+		// On affiche le scoreboard a tous les joueurs en ligne actuellement		
 		for(Player online : Bukkit.getOnlinePlayers()){
 			online.setScoreboard(affichage);
 		}
-		firstTime = 0;
 		
+		// On modifie cette variable pour prévenu que ce n'est plus la premiere fois que la boucle a été démarrer
+		firstTime = false;
 	}
-	
 }
