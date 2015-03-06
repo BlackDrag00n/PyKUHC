@@ -44,7 +44,7 @@ public class Boucle implements Runnable {
 				player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] " + ChatColor.GREEN + Boucle.getTime() +" Secondes");
 				player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 10, 1);
 			}
-			if (Boucle.getTime() == 0) {
+			if (Boucle.getTime() <= 0) {
 				player.sendMessage(ChatColor.AQUA + "[" + pluginPyKUHC.nomPlugin + "] " + ChatColor.YELLOW + "[Timer] " + ChatColor.GREEN + "L'UHC démarre !!");
 				player.playSound(player.getLocation(), Sound.EXPLODE, 10, 1);
 				Bukkit.getServer().getScheduler().cancelTask(Boucle.loop);
