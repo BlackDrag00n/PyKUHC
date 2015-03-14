@@ -38,8 +38,9 @@ public class Scoreboard implements Runnable {
 	public static int affLoop;
 	
 	// Variable configurable
-	boolean equipe = false;
-	int joueurParEquipe = 2;
+	public static boolean equipe = false;
+	public static int joueurParEquipe = 2;
+	
 	
 	// Boucle qui affichera ce que contient le scoreboard
 	@SuppressWarnings("unused")
@@ -72,7 +73,7 @@ public class Scoreboard implements Runnable {
 		nbJoueur = objective.getScore(ChatColor.GREEN + "Joueur: " + ChatColor.GOLD + i + "/" + maxJoueur);
 		nbJoueur.setScore(-2);
 		
-		// On compte le nombre d'équipe faisable selon le nombre de joueur en ligne / (Max joueur/2) ET on affiche
+		// On compte le nombre d'équipe faisable selon le nombre de joueur en ligne / (Max joueur/ joueur par equipe) ET on affiche SI les équipes sont activé SINON j'affiche une ligne blanche
 		int k = 0;
 		if (equipe) {
 			if (i % joueurParEquipe == 0){
@@ -81,8 +82,11 @@ public class Scoreboard implements Runnable {
 			else {
 				k = (i / joueurParEquipe) + 1;
 			}
+			nbEquipe = objective.getScore(ChatColor.GREEN + "Equipe: " + ChatColor.GOLD + k + "/" + maxJoueur/joueurParEquipe);
 		}
-		nbEquipe = objective.getScore(ChatColor.GREEN + "Equipe: " + ChatColor.GOLD + k + "/" + maxJoueur/2);
+		else {
+			nbEquipe = objective.getScore(" ");
+		}
 		nbEquipe.setScore(-3);
 		
 		// On affiche le temps restant lors de la lancement de la commande /timer start

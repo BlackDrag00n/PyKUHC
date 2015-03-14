@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.paramystick.PyKUHC.commandes.CommandeTeam;
 import fr.paramystick.PyKUHC.commandes.CommandeTimer;
 import fr.paramystick.PyKUHC.events.PlayerJoin;
 import fr.paramystick.PyKUHC.events.PlayerQuit;
@@ -16,7 +17,7 @@ import fr.paramystick.PyKUHC.fonctions.Scoreboard;
 public class PyKUHC extends JavaPlugin {
 	
 	private CommandeTimer CommandeTimer;
-	
+	private CommandeTeam CommandeEquipe;
 	public final Logger log = Logger.getLogger("Minecraft"); // On récupére dans une variable "log" la console
 	public final PluginDescriptionFile pdfFile = this.getDescription(); // On lis le fichier "plugin.yml"
 	public String nomPlugin = pdfFile.getName(); // On crée une variable public qui va permettre d'etre appeler partout (PUBLIC)
@@ -36,6 +37,10 @@ public class PyKUHC extends JavaPlugin {
 		
 		CommandeTimer = new CommandeTimer(this); // On précise qu'il y a des commandes dans la classe "CommandeTimer"
 		getCommand("timer").setExecutor(CommandeTimer); // On précise quelle commande on veut récupérer de la classe "CommandeTimer", ici : /timer
+		
+		CommandeEquipe = new CommandeTeam(this); // On précise qu'il y a des commandes dans la classe "CommandeTeam"
+		getCommand("equipe").setExecutor(CommandeEquipe); // On précise quelle commande on veut récupérer de la classe "CommandeTeam", ici : /equipe
+		
 		
 		Scoreboard.affLoop = this.getServer().getScheduler().scheduleSyncRepeatingTask(this,new Scoreboard(this), 0, 20); // On affiche le Scoreboard du plugin
 		
