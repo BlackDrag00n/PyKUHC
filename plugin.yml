@@ -17,6 +17,10 @@ commands:
     usage : |
            /equipe <active/desactive>
            /equipe <set> <joueur par equipe>
+           /equipe <quit>
+           /equipe <list>
            Exemple: /equipe set 3 - initialise les équipe à 3 joueurs.
                          /equipe active - démarre le système d'équipe.
                          /equipe desactive - désactive le système d'équipe = 1 vs tous.
+                         /equipe join rouge - rejoins l'équipe rouge
+                         /equipe quit - vous ne faites plus partie d'aucune équipe.

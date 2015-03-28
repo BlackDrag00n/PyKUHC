@@ -20,8 +20,8 @@ public class Scoreboard implements Runnable {
 	}
 	
 	// Création d'un scoreboard
-	ScoreboardManager manager = Bukkit.getScoreboardManager(); // Création d'un scoreboard
-	org.bukkit.scoreboard.Scoreboard affichage = manager.getNewScoreboard(); // Création d'un scoreboard
+	public static ScoreboardManager manager = Bukkit.getScoreboardManager(); // Création d'un scoreboard
+	public static org.bukkit.scoreboard.Scoreboard affichage = manager.getNewScoreboard(); // Création d'un scoreboard
 	Objective objective = affichage.registerNewObjective("ParamYsticK UHC", "dummy"); // Nom et type de l'objectif
 	
 	// Initialisation des variables (création) - NE PAS MODIFIER -
